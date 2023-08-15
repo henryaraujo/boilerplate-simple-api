@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare (strict_types = 1);
 
 namespace SimpleApi\Core;
 
@@ -21,28 +23,28 @@ class SimpleApiLoader implements IClassLoader
             throw new NotFoundHttpException(sprintf('Class "%s" does not exist', $class), 404);
         }
 
-		try {
-			return $this->container->get($class);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        try {
+            return $this->container->get($class);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException($e->getMessage(), (int) $e->getCode(), $e->getPrevious());
+        }
     }
-    
+
     public function loadClassMethod($class, string $method, array $parameters)
     {
-		try {
-			return $this->container->call([$class, $method], $parameters);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        try {
+            return $this->container->call([$class, $method], $parameters);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException($e->getMessage(), (int) $e->getCode(), $e->getPrevious());
+        }
     }
 
     public function loadClosure(callable $closure, array $parameters)
     {
-		try {
-			return $this->container->call($closure, $parameters);
-		} catch (\Exception $e) {
-			throw new NotFoundHttpException($e->getMessage(), (int)$e->getCode(), $e->getPrevious());
-		}
+        try {
+            return $this->container->call($closure, $parameters);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException($e->getMessage(), (int) $e->getCode(), $e->getPrevious());
+        }
     }
 }

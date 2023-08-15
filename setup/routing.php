@@ -1,15 +1,16 @@
 <?php
 
+declare (strict_types = 1);
+
 require_once BOOTSTRAP_PATH . 'routes.php';
 
 use DI\Container;
-
-use SimpleApi\Core\SimpleApiLoader;
 use Pecee\SimpleRouter\SimpleRouter;
+use SimpleApi\Core\SimpleApiLoader;
 
-function router(Container $container): void 
+function routing(Container $container): void
 {
     SimpleRouter::setCustomClassLoader(new SimpleApiLoader($container));
-    SimpleRouter::setDefaultNamespace('SimpleApi\Controllers');    
+    SimpleRouter::setDefaultNamespace('SimpleApi\Controllers');
     SimpleRouter::start();
 };

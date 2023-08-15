@@ -1,13 +1,17 @@
 <?php
 
-require_once SETUP_PATH . 'doctrine.php';
-require_once SETUP_PATH . 'router.php';
+declare (strict_types = 1);
+
+require_once SETUP_PATH . 'persistence.php';
+require_once SETUP_PATH . 'routing.php';
 
 use DI\Container;
-function bootstrap(Container $container): void {
+
+function bootstrap(Container $container): void
+{
     $dotenv = Dotenv\Dotenv::createImmutable(ROOT_PATH);
     $dotenv->load();
-    
-    doctrine($container);
-    router($container);
+
+    persistence($container);
+    routing($container);
 }

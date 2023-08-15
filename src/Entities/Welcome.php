@@ -1,8 +1,9 @@
 <?php
 
+declare (strict_types = 1);
+
 namespace SimpleApi\Entities;
 
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
@@ -14,8 +15,8 @@ class Welcome
     #[ORM\Id]
     #[ORM\Column(type: "uuid", unique: true)]
     #[ORM\GeneratedValue(strategy: "CUSTOM")]
-    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    protected UuidInterface | string $id;
+    #[ORM\CustomIdGenerator(class :UuidGenerator::class)]
+    protected UuidInterface|string $id;
 
     #[ORM\Column(type: 'string')]
     protected string $name;
@@ -24,12 +25,12 @@ class Welcome
     {
         return $this->id;
     }
-    
+
     public function getName(): string
     {
         return $this->name;
     }
-    
+
     public function setId(string $id): Welcome
     {
         $this->id = $id;
@@ -41,12 +42,12 @@ class Welcome
         $this->name = $name;
         return $this;
     }
-    
+
     public function toArray(): array
     {
         return [
             'id' => $this->getId(),
-            'name' => $this->getName()
-        ];    
+            'name' => $this->getName(),
+        ];
     }
 }
